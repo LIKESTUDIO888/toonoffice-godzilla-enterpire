@@ -1,643 +1,786 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GODZILLA ENTERPIRE - พลิกโฉมธุรกิจคุณด้วยโค้ดคุณภาพ</title>
-    <!-- Fonts: Prompt for headings, Sarabun for body text (Thai-friendly, modern) -->
-    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #4B0082; /* ม่วงเข้ม */
-            --secondary-color: #8A2BE2; /* ม่วงกลาง */
-            --accent-color: #00CED1; /* ฟ้าอมเขียว */
-            --text-light: #FFFFFF; /* ขาว */
-            --background-dark: #1A1A2E; /* เทาเข้มเกือบดำ */
-            --card-background: #252540; /* พื้นหลังการ์ดที่เข้มขึ้นเล็กน้อย */
-            --border-color: #3f3f5a;
-            --shadow-light: rgba(0, 0, 0, 0.4);
-            --shadow-heavy: rgba(0, 0, 0, 0.7);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Sarabun', sans-serif;
-            background-color: var(--background-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-            overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอน */
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
-        /* --- Navbar --- */
-        .navbar {
-            background-color: var(--background-dark);
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px var(--shadow-light);
-        }
-
-        .navbar-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: 'Prompt', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .logo:hover {
-            color: var(--accent-color);
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-light);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            background: var(--secondary-color);
-            left: 0;
-            bottom: -5px;
-            transition: width 0.3s ease-in-out;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background-color: var(--text-light);
-            transition: all 0.3s ease;
-        }
-
-        /* --- Hero Section --- */
-        .hero {
-            background: linear-gradient(135deg, var(--background-dark) 0%, #0d0d1a 100%);
-            text-align: center;
-            padding: 8rem 0;
-            position: relative;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%232e2e4a" fill-opacity="0.4"><path d="M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V95zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V85zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V75zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V65zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V55zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V45zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V35zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V25zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V15zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V5zM0 0h1v96H0V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zM0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1z"></path></g></svg>');
-            background-size: 100px 100px;
-            opacity: 0.1;
-            z-index: 0;
-            animation: backgroundPan 60s linear infinite;
-        }
-
-        @keyframes backgroundPan {
-            from { background-position: 0 0; }
-            to { background-position: 1000px 1000px; }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-family: 'Prompt', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 15px rgba(138, 43, 226, 0.6); /* Shadow for heading */
-            animation: fadeInScale 1s ease-out forwards;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            max-width: 800px;
-            margin: 0 auto 2.5rem;
-            color: var(--text-light);
-            animation: fadeInScale 1.2s ease-out forwards;
-            animation-delay: 0.2s;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-            color: var(--background-dark);
-            padding: 1rem 3rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px var(--shadow-light);
-            animation: fadeInScale 1.4s ease-out forwards;
-            animation-delay: 0.4s;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px var(--shadow-heavy);
-            background: linear-gradient(90deg, var(--accent-color) 0%, var(--secondary-color) 100%);
-        }
-
-        /* --- General Section Styling --- */
-        section {
-            padding: 6rem 0;
-            position: relative;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        section.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        section:nth-of-type(odd) {
-            background-color: var(--background-dark);
-        }
-
-        section:nth-of-type(even) {
-            background-color: #151525; /* สีเข้มขึ้นเล็กน้อยสำหรับสลับ */
-            border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-header h2 {
-            font-family: 'Prompt', sans-serif;
-            font-size: 2.8rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-header h2::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: -10px;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        .section-header p {
-            font-size: 1.3rem;
-            color: var(--secondary-color);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* --- Services Section --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background-color: var(--card-background);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            text-align: center;
-            box-shadow: 0 5px 15px var(--shadow-light);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px var(--shadow-heavy);
-            border-color: var(--secondary-color);
-        }
-
-        .service-card h3 {
-            font-family: 'Prompt', sans-serif;
-            font-size: 1.8rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .service-card p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-
-        /* --- Portfolio Section --- */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .portfolio-card {
-            background-color: var(--card-background);
-            border-radius: var(--radius);
-            box-shadow: 0 5px 15px var(--shadow-light);
-            overflow: hidden;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid var(--border-color);
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 25px var(--shadow-heavy);
-            border-color: var(--accent-color);
-        }
-
-        .portfolio-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .portfolio-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .portfolio-info {
-            padding: 2rem;
-        }
-
-        .portfolio-info h3 {
-            font-family: 'Prompt', sans-serif;
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            margin-bottom: 0.8rem;
-        }
-
-        .portfolio-info p {
-            font-size: 1.1rem;
-            color: var(--text-light);
-        }
-
-        /* --- Contact Section --- */
-        .contact-content {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: var(--text-light);
-        }
-
-        .discord-link {
-            display: inline-flex; /* Use flex to align icon and text */
-            align-items: center;
-            background: #7289DA; /* Discord Brand Color */
-            color: #FFFFFF;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(114, 137, 218, 0.4);
-        }
-
-        .discord-link:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 8px 20px rgba(114, 137, 218, 0.7);
-            background: #677BC4; /* Slightly darker on hover */
-        }
-
-        .discord-icon {
-            margin-right: 0.8rem;
-            font-size: 1.5rem; /* Adjust icon size as needed */
-        }
-
-        /* --- Footer --- */
-        .footer {
-            background-color: var(--background-dark);
-            color: var(--secondary-color);
-            text-align: center;
-            padding: 2.5rem 0;
-            border-top: 1px solid var(--border-color);
-            font-size: 0.9rem;
-        }
-
-        .footer-links {
-            margin-top: 1rem;
-        }
-
-        .footer-links a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            margin: 0 1rem;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* --- Animations --- */
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.95) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            .navbar-content {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .logo {
-                width: 100%;
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-
-            .nav-links {
-                display: none; /* Hide by default on small screens */
-                flex-direction: column;
-                width: 100%;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex; /* Show when active */
-            }
-
-            .menu-toggle {
-                display: flex;
-                position: absolute;
-                right: 1.5rem;
-                top: 1.2rem;
-            }
-
-            .menu-toggle.active span:nth-child(1) {
-                transform: rotate(45deg) translate(5px, 5px);
-            }
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .menu-toggle.active span:nth-child(3) {
-                transform: rotate(-45deg) translate(5px, -5px);
-            }
-
-            .hero {
-                padding: 6rem 0;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .cta-button {
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .section-header p {
-                font-size: 1rem;
-            }
-
-            .services-grid, .portfolio-grid {
-                grid-template-columns: 1fr; /* Single column on small screens */
-            }
-
-            .service-card, .portfolio-card {
-                padding: 2rem;
-            }
-
-            .contact-content p {
-                font-size: 1.1rem;
-            }
-
-            .discord-link {
-                padding: 0.8rem 2rem;
-                font-size: 1rem;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สถานะการ Deploy Landing Page | GODZILLA ENTERPIRE</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7fbff;
+      --bg-soft: #eef7ff;
+      --surface: rgba(255, 255, 255, 0.86);
+      --surface-solid: #ffffff;
+      --text: #0f172a;
+      --muted: #526173;
+      --primary: #16a34a;
+      --primary-dark: #15803d;
+      --blue: #2563eb;
+      --cyan: #06b6d4;
+      --amber: #f59e0b;
+      --border: rgba(15, 23, 42, 0.1);
+      --shadow: 0 24px 70px rgba(37, 99, 235, 0.14);
+      --shadow-soft: 0 16px 42px rgba(15, 23, 42, 0.08);
+      --radius: 28px;
+      --radius-sm: 18px;
+      --container: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Sarabun", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(22, 163, 74, 0.18), transparent 34rem),
+        radial-gradient(circle at 85% 10%, rgba(6, 182, 212, 0.18), transparent 30rem),
+        linear-gradient(180deg, #ffffff 0%, var(--bg) 45%, #eef8f1 100%);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--container));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(255, 255, 255, 0.78);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Kanit", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+      box-shadow: 0 12px 28px rgba(22, 163, 74, 0.25);
+      font-size: 20px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: inline-flex;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-weight: 600;
+      transition: 0.22s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-dark);
+      background: rgba(22, 163, 74, 0.08);
+    }
+
+    .hero {
+      padding: 74px 0 34px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border: 1px solid rgba(22, 163, 74, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.74);
+      color: var(--primary-dark);
+      font-weight: 700;
+      box-shadow: var(--shadow-soft);
+      margin-bottom: 18px;
+    }
+
+    .pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--amber);
+      position: relative;
+    }
+
+    .pulse::after {
+      content: "";
+      position: absolute;
+      inset: -7px;
+      border-radius: inherit;
+      border: 1px solid rgba(245, 158, 11, 0.45);
+      animation: ping 1.8s ease-out infinite;
+    }
+
+    h1 {
+      font-family: "Kanit", sans-serif;
+      font-size: clamp(2.35rem, 7vw, 5.1rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 22px;
+    }
+
+    .highlight {
+      color: transparent;
+      background: linear-gradient(135deg, var(--primary-dark), var(--blue), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .lead {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2.3vw, 1.25rem);
+      margin-bottom: 28px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: 0.22s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--blue));
+      box-shadow: 0 18px 34px rgba(37, 99, 235, 0.22);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 42px rgba(37, 99, 235, 0.28);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: var(--border);
+      color: var(--text);
+    }
+
+    .btn-ghost:hover {
+      transform: translateY(-3px);
+      border-color: rgba(22, 163, 74, 0.28);
+      background: #ffffff;
+    }
+
+    .status-panel {
+      position: relative;
+      padding: 22px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .status-panel::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -100px;
+      top: -120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.26), transparent 68%);
+      z-index: -1;
+    }
+
+    .panel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .panel-title {
+      font-family: "Kanit", sans-serif;
+      font-size: 1.35rem;
+      line-height: 1.2;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.13);
+      color: #92400e;
+      border: 1px solid rgba(245, 158, 11, 0.26);
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .terminal {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #07111f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .terminal-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 13px 15px;
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: #ef4444;
+    }
+
+    .dot:nth-child(2) {
+      background: #f59e0b;
+    }
+
+    .dot:nth-child(3) {
+      background: #22c55e;
+    }
+
+    .terminal-body {
+      padding: 18px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.92rem;
+      color: #c7f9d4;
+      min-height: 210px;
+    }
+
+    .line {
+      display: block;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(8px);
+      animation: revealLine 0.55s ease forwards;
+    }
+
+    .line:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+
+    .line:nth-child(3) {
+      animation-delay: 0.5s;
+    }
+
+    .line:nth-child(4) {
+      animation-delay: 0.75s;
+    }
+
+    .line:nth-child(5) {
+      animation-delay: 1s;
+    }
+
+    .main {
+      padding: 24px 0 72px;
+    }
+
+    .report-card {
+      border-radius: var(--radius);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      padding: clamp(22px, 4vw, 36px);
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-family: "Kanit", sans-serif;
+      font-size: clamp(1.65rem, 4vw, 2.45rem);
+      line-height: 1.16;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      max-width: 720px;
+    }
+
+    .time-chip {
+      flex: 0 0 auto;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      color: var(--blue);
+      font-weight: 800;
+      border: 1px solid rgba(37, 99, 235, 0.12);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, #ffffff, #f9fcff);
+      transition: 0.22s ease;
+    }
+
+    .mini-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .mini-label {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-bottom: 7px;
+    }
+
+    .mini-value {
+      font-family: "Kanit", sans-serif;
+      font-size: 1.18rem;
+      color: var(--text);
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+    }
+
+    .step-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--cyan));
+    }
+
+    .step.pending .step-icon {
+      background: linear-gradient(135deg, var(--amber), #f97316);
+    }
+
+    .step h3 {
+      font-family: "Kanit", sans-serif;
+      font-size: 1.12rem;
+      margin-bottom: 4px;
+    }
+
+    .step p {
+      color: var(--muted);
+    }
+
+    .notice {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(6, 182, 212, 0.1));
+      border: 1px solid rgba(245, 158, 11, 0.22);
+      color: #4b5563;
+    }
+
+    .notice strong {
+      color: #92400e;
+    }
+
+    .contact {
+      margin-top: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px;
+      border-radius: 22px;
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .contact p {
+      color: rgba(255, 255, 255, 0.76);
+    }
+
+    .discord-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: #5865f2;
+      color: #ffffff;
+      font-weight: 800;
+      transition: 0.22s ease;
+    }
+
+    .discord-link:hover {
+      transform: translateY(-3px);
+      background: #4752c4;
+    }
+
+    footer {
+      padding: 28px 0 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes ping {
+      from {
+        transform: scale(0.75);
+        opacity: 0.85;
+      }
+      to {
+        transform: scale(1.65);
+        opacity: 0;
+      }
+    }
+
+    @keyframes revealLine {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav-inner {
+        min-height: auto;
+        padding: 14px 0;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+      }
+
+      .hero {
+        padding-top: 48px;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        flex-direction: column;
+      }
+
+      .time-chip {
+        width: fit-content;
+      }
+
+      .contact {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: min(100% - 24px, var(--container));
+      }
+
+      .brand {
+        font-size: 0.98rem;
+      }
+
+      .brand-mark {
+        width: 38px;
+        height: 38px;
+        border-radius: 13px;
+      }
+
+      .hero {
+        padding-bottom: 22px;
+      }
+
+      .cta-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .panel-top {
+        flex-direction: column;
+      }
+
+      .terminal-body {
+        font-size: 0.82rem;
+      }
+
+      .report-card {
+        border-radius: 22px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav class="navbar">
-        <div class="container navbar-content">
-            <a href="#" class="logo">GODZILLA ENTERPIRE</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="nav-menu">
-                <li><a href="#hero">หน้าแรก</a></li>
-                <li><a href="#services">บริการของเรา</a></li>
-                <li><a href="#portfolio">ผลงาน</a></li>
-                <li><a href="#contact">ติดต่อเรา</a></li>
-            </ul>
-        </div>
-    </nav>
+  <nav class="nav" aria-label="แถบนำทางหลัก">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="กลับไปด้านบน">
+        <span class="brand-mark">G</span>
+        <span>GODZILLA ENTERPIRE</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#status">สถานะ</a></li>
+        <li><a href="#progress">ความคืบหน้า</a></li>
+        <li><a href="#contact">ติดต่อ</a></li>
+      </ul>
+    </div>
+  </nav>
 
-    <section id="hero" class="hero">
-        <div class="hero-content container">
-            <h1>GODZILLA ENTERPIRE: พลิกโฉมธุรกิจคุณด้วยโค้ดคุณภาพ</h1>
-            <p>เราคือผู้เชี่ยวชาญด้านการเขียนและรันโค้ด พร้อมสร้างสรรค์โซลูชันที่ตอบโจทย์ทุกความต้องการ</p>
-            <a href="#contact" class="cta-button">เริ่มต้นโปรเจกต์ของคุณ</a>
+  <header id="top" class="hero">
+    <div class="container hero-grid">
+      <div class="reveal">
+        <div class="eyebrow"><span class="pulse"></span> รายงานสถานะการ Deploy</div>
+        <h1>ตรวจสอบ Landing Page บนแพลตฟอร์มฟรี <span class="highlight">แบบพร้อมส่งหัวหน้า</span></h1>
+        <p class="lead">
+          หน้านี้สรุปสถานะการเตรียมไฟล์เว็บไซต์สำหรับ GODZILLA ENTERPIRE พร้อมเช็กลิสต์ก่อนนำขึ้นออนไลน์ และพื้นที่แจ้งลิงก์จริงหลัง deploy เสร็จเรียบร้อย
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#status">ดูสถานะล่าสุด</a>
+          <a class="btn btn-ghost" href="#contact">ช่องทางติดต่อ</a>
         </div>
+      </div>
+
+      <aside class="status-panel reveal" aria-label="แผงสถานะการ deploy">
+        <div class="panel-top">
+          <div>
+            <div class="panel-title">สถานะงานล่าสุด</div>
+            <p style="color: var(--muted); margin-top: 6px;">ไฟล์หน้าเว็บพร้อมใช้งานในรูปแบบ HTML ไฟล์เดียว</p>
+          </div>
+          <div class="badge"><span class="pulse"></span> รอเผยแพร่จริง</div>
+        </div>
+        <div class="terminal">
+          <div class="terminal-bar">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+          <div class="terminal-body">
+            <span class="line">$ ตรวจสอบโครงสร้างไฟล์: ผ่าน</span>
+            <span class="line">$ ตรวจสอบ CSS และ JavaScript แบบรวมไฟล์: ผ่าน</span>
+            <span class="line">$ ตรวจสอบ Responsive Layout: ผ่าน</span>
+            <span class="line">$ ตรวจสอบเนื้อหาจริงภาษาไทย: ผ่าน</span>
+            <span class="line">$ ลิงก์เว็บไซต์ออนไลน์: ยังไม่มีลิงก์จริงให้ยืนยันในบริบทนี้</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main class="main">
+    <section id="status" class="container report-card reveal">
+      <div class="section-head">
+        <div>
+          <h2>สรุปสถานะการ Deploy</h2>
+          <p>
+            ทีม GODZILLA ENTERPIRE เตรียมหน้าเว็บสำหรับรายงานสถานะเรียบร้อยแล้ว จุดที่ยังต้องทำต่อคือการนำไฟล์นี้ไปเผยแพร่บนแพลตฟอร์มฟรี เช่น GitHub Pages แล้วค่อยนำ URL จริงมาใส่ในรายงาน
+          </p>
+        </div>
+        <div class="time-chip">สถานะปัจจุบัน</div>
+      </div>
+
+      <div class="status-grid">
+        <article class="mini-card">
+          <div class="mini-label">ไฟล์เว็บไซต์</div>
+          <div class="mini-value">พร้อมทดสอบ</div>
+        </article>
+        <article class="mini-card">
+          <div class="mini-label">รูปแบบไฟล์</div>
+          <div class="mini-value">HTML ไฟล์เดียว</div>
+        </article>
+        <article class="mini-card">
+          <div class="mini-label">ลิงก์ออนไลน์</div>
+          <div class="mini-value">รอ deploy จริง</div>
+        </article>
+      </div>
+
+      <div id="progress" class="timeline" aria-label="รายการความคืบหน้า">
+        <article class="step">
+          <div class="step-icon">1</div>
+          <div>
+            <h3>เตรียมหน้า Landing Page สำหรับรายงานสถานะ</h3>
+            <p>จัดหน้าให้เป็นสไตล์โมเดิร์น-เทค ใช้ภาษาไทยทั้งหมด มีแถบนำทาง ส่วนสรุปสถานะ เช็กลิสต์ และช่องทางติดต่อครบในหน้าเดียว</p>
+          </div>
+        </article>
+
+        <article class="step">
+          <div class="step-icon">2</div>
+          <div>
+            <h3>ตรวจความสมบูรณ์ของไฟล์</h3>
+            <p>รวม CSS และ JavaScript ไว้ในไฟล์เดียว ปิดแท็กครบ รองรับมือถือและเดสก์ท็อป พร้อมใช้งานเป็นไฟล์เริ่มต้นสำหรับ deploy</p>
+          </div>
+        </article>
+
+        <article class="step pending">
+          <div class="step-icon">3</div>
+          <div>
+            <h3>นำขึ้นแพลตฟอร์มฟรีและแจ้งลิงก์จริง</h3>
+            <p>ยังไม่มี URL ที่เผยแพร่จริงในข้อมูลที่ได้รับตอนนี้ จึงไม่ใส่ลิงก์สมมติให้หัวหน้า เมื่อเชื่อม GitHub หรือส่งผล deploy มา ทีมจะอัปเดตลิงก์ออนไลน์ให้ทันที</p>
+          </div>
+        </article>
+      </div>
+
+      <div class="notice">
+        <strong>หมายเหตุสำคัญ:</strong>
+        เพื่อความถูกต้อง ผมยังไม่ใส่ URL เว็บไซต์ที่ออนไลน์แล้ว เพราะในบริบทนี้ยังไม่มีผล deploy จริงให้ยืนยัน หลังนำไฟล์ขึ้น GitHub Pages หรือแพลตฟอร์มฟรีเรียบร้อยแล้ว สามารถนำลิงก์จริงมาแทนข้อความ “รอ deploy จริง” ได้ทันที
+      </div>
+
+      <div id="contact" class="contact">
+        <div>
+          <h2 style="font-size: 1.45rem; margin-bottom: 4px;">ช่องทางติดต่อ GODZILLA ENTERPIRE</h2>
+          <p>ติดต่อเราได้ที่ Discord สำหรับส่งรายละเอียดงาน เขียนโค้ด รันโค้ด และติดตามความคืบหน้า</p>
+        </div>
+        <a class="discord-link" href="https://discord.gg/TCeuVqr8AZ" target="_blank" rel="noopener noreferrer">ติดต่อเราได้ที่ Discord</a>
+      </div>
     </section>
+  </main>
 
-    <section id="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>บริการของเรา</h2>
-                <p>เรานำเสนอการพัฒนาซอฟต์แวร์ที่หลากหลาย เพื่อยกระดับธุรกิจของคุณ</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>การพัฒนา Discord Bot</h3>
-                    <p>สร้างบอทอัตโนมัติเพื่อจัดการคอมมูนิตี้ เพิ่มประสิทธิภาพการทำงานและประสบการณ์ผู้ใช้</p>
-                </div>
-                <div class="service-card">
-                    <h3>ระบบอัตโนมัติ (Automation)</h3>
-                    <p>ปรับปรุงกระบวนการทำงานด้วยสคริปต์และระบบอัจฉริยะ ลดเวลาและข้อผิดพลาด</p>
-                </div>
-                <div class="service-card">
-                    <h3>การพัฒนาเว็บไซต์ (Web Development)</h3>
-                    <p>ออกแบบและพัฒนาเว็บไซต์ที่ทันสมัย ใช้งานง่าย ตอบสนองทุกอุปกรณ์</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <footer>
+    <div class="container">
+      <p>GODZILLA ENTERPIRE — เอเจนต์ที่เขียนโค้ดและรันโค้ดตามงานที่ได้รับมอบหมาย</p>
+    </div>
+  </footer>
 
-    <section id="portfolio">
-        <div class="container">
-            <div class="section-header">
-                <h2>ผลงานของเรา</h2>
-                <p>เราภูมิใจในทุกโปรเจกต์ที่สร้างสรรค์ เพื่อพิสูจน์ถึงคุณภาพและความเชี่ยวชาญ</p>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-card">
-                    <img src="https://via.placeholder.com/400x220/8A2BE2/FFFFFF?text=GreenThumb+Bot" alt="GreenThumb Discord Bot">
-                    <div class="portfolio-info">
-                        <h3>GreenThumb Discord Bot</h3>
-                        <p>บอท Discord ที่ช่วยจัดการกิจกรรมในคอมมูนิตี้สำหรับผู้ชื่นชอบพืชพรรณและสวน</p>
-                    </div>
-                </div>
-                <!-- สามารถเพิ่มผลงานอื่น ๆ ได้ที่นี่ -->
-            </div>
-        </div>
-    </section>
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
 
-    <section id="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2>ติดต่อเรา</h2>
-                <p>มาเริ่มต้นสร้างสรรค์สิ่งใหม่ๆ ด้วยกัน</p>
-            </div>
-            <div class="contact-content">
-                <p>ติดต่อเราได้ที่ Discord เพื่อพูดคุยเกี่ยวกับโปรเจกต์ของคุณ หรือสอบถามข้อมูลเพิ่มเติม เราพร้อมให้บริการ!</p>
-                <a href="https://discord.gg/TCeuVqr8AZ" target="_blank" rel="noopener noreferrer" class="discord-link">
-                    <span class="discord-icon"></span> เข้าร่วม Discord ของเรา
-                </a>
-            </div>
-        </div>
-    </section>
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.14 });
 
-    <footer class="footer">
-        <div class="container">
-            <p>© 2024 GODZILLA ENTERPIRE. All rights reserved.</p>
-            <div class="footer-links">
-                <!-- <a>นโยบายความเป็นส่วนตัว</a> ถ้ามี -->
-            </div>
-        </div>
-    </footer>
+    revealItems.forEach((item) => revealObserver.observe(item));
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Smooth scrolling for navigation links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                });
-            });
-
-            // Intersection Observer for fade-in animations
-            const sections = document.querySelectorAll('section');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            sections.forEach(section => {
-                observer.observe(section);
-            });
-
-            // Mobile menu toggle
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navMenu = document.getElementById('nav-menu');
-
-            mobileMenu.addEventListener('click', () => {
-                navMenu.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-            });
-
-            // Close mobile menu when a link is clicked
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                });
-            });
-
-            // Add Discord icon dynamically (using SVG for simplicity)
-            const discordLink = document.querySelector('.discord-link .discord-icon');
-            if (discordLink) {
-                discordLink.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.25 0c-1.8 0-3.264.936-4.004 2.304l-.06-.108-1.572-2.196h-8.25c-1.128 0-2.04.912-2.04 2.04v16.32c0 1.128.912 2.04 2.04 2.04h11.232c1.476 0 2.76-1.02 3.108-2.436.216-.864.12-1.788-.264-2.58l.12-.084c.732-.48 1.284-1.296 1.488-2.22.228-1.092-.096-2.172-.888-2.928l.048-.048c.84-.792 1.392-1.776 1.596-2.856.228-1.092-.096-2.172-.888-2.928.732-.48 1.284-1.296 1.488-2.22.18-.864.084-1.788-.264-2.58-.096-.204-.216-.396-.348-.576.732-.48 1.284-1.296 1.488-2.22.228-1.092-.096-2.172-.888-2.928l.048-.048c.84-.792 1.392-1.776 1.596-2.856.228-1.092-.096-2.172-.888-2.928zM7.8 15.6c-.924 0-1.68-.756-1.68-1.68s.756-1.68 1.68-1.68 1.68.756 1.68 1.68-.756 1.68-1.68 1.68zm8.4 0c-.924 0-1.68-.756-1.68-1.68s.756-1.68 1.68-1.68 1.68.756 1.68 1.68-.756 1.68-1.68 1.68zM12 11.28c-2.4 0-4.32 1.608-4.32 3.6 0 2.004 1.92 3.6 4.32 3.6 2.4 0 4.32-1.608 4.32-3.6 0-2.004-1.92-3.6-4.32-3.6zM12 11.28c-.012 0-.024 0-.036 0-.012 0-.024 0-.036 0z"/></svg>`;
-            }
-        });
-    </script>
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const target = document.querySelector(link.getAttribute("href"));
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
