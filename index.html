@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GODZILLA ENTERPIRE - พลิกโฉมธุรกิจคุณด้วยโค้ดคุณภาพ</title>
+    <!-- Fonts: Prompt for headings, Sarabun for body text (Thai-friendly, modern) -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4B0082; /* ม่วงเข้ม */
+            --secondary-color: #8A2BE2; /* ม่วงกลาง */
+            --accent-color: #00CED1; /* ฟ้าอมเขียว */
+            --text-light: #FFFFFF; /* ขาว */
+            --background-dark: #1A1A2E; /* เทาเข้มเกือบดำ */
+            --card-background: #252540; /* พื้นหลังการ์ดที่เข้มขึ้นเล็กน้อย */
+            --border-color: #3f3f5a;
+            --shadow-light: rgba(0, 0, 0, 0.4);
+            --shadow-heavy: rgba(0, 0, 0, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* ป้องกันการเลื่อนแนวนอน */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background-color: var(--background-dark);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Prompt', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            background: linear-gradient(135deg, var(--background-dark) 0%, #0d0d1a 100%);
+            text-align: center;
+            padding: 8rem 0;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><g fill="%232e2e4a" fill-opacity="0.4"><path d="M96 95h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V95zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V85zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V75zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V65zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V55zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V45zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V35zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V25zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V15zm0-10h4v1h-4v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4h-9v4h-1v-4H0v-1h96V5zM0 0h1v96H0V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zm10 0h1v96h-1V0zM0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1zm0 10h96v1H0v-1z"></path></g></svg>');
+            background-size: 100px 100px;
+            opacity: 0.1;
+            z-index: 0;
+            animation: backgroundPan 60s linear infinite;
+        }
+
+        @keyframes backgroundPan {
+            from { background-position: 0 0; }
+            to { background-position: 1000px 1000px; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Prompt', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            text-shadow: 0 0 15px rgba(138, 43, 226, 0.6); /* Shadow for heading */
+            animation: fadeInScale 1s ease-out forwards;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            color: var(--text-light);
+            animation: fadeInScale 1.2s ease-out forwards;
+            animation-delay: 0.2s;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            color: var(--background-dark);
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            animation: fadeInScale 1.4s ease-out forwards;
+            animation-delay: 0.4s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px var(--shadow-heavy);
+            background: linear-gradient(90deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+        }
+
+        /* --- General Section Styling --- */
+        section {
+            padding: 6rem 0;
+            position: relative;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section:nth-of-type(odd) {
+            background-color: var(--background-dark);
+        }
+
+        section:nth-of-type(even) {
+            background-color: #151525; /* สีเข้มขึ้นเล็กน้อยสำหรับสลับ */
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Prompt', sans-serif;
+            font-size: 2.8rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -10px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Services Section --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background-color: var(--card-background);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 5px 15px var(--shadow-light);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px var(--shadow-heavy);
+            border-color: var(--secondary-color);
+        }
+
+        .service-card h3 {
+            font-family: 'Prompt', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-card p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* --- Portfolio Section --- */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-card {
+            background-color: var(--card-background);
+            border-radius: var(--radius);
+            box-shadow: 0 5px 15px var(--shadow-light);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px var(--shadow-heavy);
+            border-color: var(--accent-color);
+        }
+
+        .portfolio-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-info {
+            padding: 2rem;
+        }
+
+        .portfolio-info h3 {
+            font-family: 'Prompt', sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .portfolio-info p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+        }
+
+        /* --- Contact Section --- */
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .discord-link {
+            display: inline-flex; /* Use flex to align icon and text */
+            align-items: center;
+            background: #7289DA; /* Discord Brand Color */
+            color: #FFFFFF;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(114, 137, 218, 0.4);
+        }
+
+        .discord-link:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(114, 137, 218, 0.7);
+            background: #677BC4; /* Slightly darker on hover */
+        }
+
+        .discord-icon {
+            margin-right: 0.8rem;
+            font-size: 1.5rem; /* Adjust icon size as needed */
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background-color: var(--background-dark);
+            color: var(--secondary-color);
+            text-align: center;
+            padding: 2.5rem 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* --- Animations --- */
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .nav-links {
+                display: none; /* Hide by default on small screens */
+                flex-direction: column;
+                width: 100%;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex; /* Show when active */
+            }
+
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                right: 1.5rem;
+                top: 1.2rem;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .hero {
+                padding: 6rem 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .services-grid, .portfolio-grid {
+                grid-template-columns: 1fr; /* Single column on small screens */
+            }
+
+            .service-card, .portfolio-card {
+                padding: 2rem;
+            }
+
+            .contact-content p {
+                font-size: 1.1rem;
+            }
+
+            .discord-link {
+                padding: 0.8rem 2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <a href="#" class="logo">GODZILLA ENTERPIRE</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="#hero">หน้าแรก</a></li>
+                <li><a href="#services">บริการของเรา</a></li>
+                <li><a href="#portfolio">ผลงาน</a></li>
+                <li><a href="#contact">ติดต่อเรา</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="hero" class="hero">
+        <div class="hero-content container">
+            <h1>GODZILLA ENTERPIRE: พลิกโฉมธุรกิจคุณด้วยโค้ดคุณภาพ</h1>
+            <p>เราคือผู้เชี่ยวชาญด้านการเขียนและรันโค้ด พร้อมสร้างสรรค์โซลูชันที่ตอบโจทย์ทุกความต้องการ</p>
+            <a href="#contact" class="cta-button">เริ่มต้นโปรเจกต์ของคุณ</a>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>บริการของเรา</h2>
+                <p>เรานำเสนอการพัฒนาซอฟต์แวร์ที่หลากหลาย เพื่อยกระดับธุรกิจของคุณ</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>การพัฒนา Discord Bot</h3>
+                    <p>สร้างบอทอัตโนมัติเพื่อจัดการคอมมูนิตี้ เพิ่มประสิทธิภาพการทำงานและประสบการณ์ผู้ใช้</p>
+                </div>
+                <div class="service-card">
+                    <h3>ระบบอัตโนมัติ (Automation)</h3>
+                    <p>ปรับปรุงกระบวนการทำงานด้วยสคริปต์และระบบอัจฉริยะ ลดเวลาและข้อผิดพลาด</p>
+                </div>
+                <div class="service-card">
+                    <h3>การพัฒนาเว็บไซต์ (Web Development)</h3>
+                    <p>ออกแบบและพัฒนาเว็บไซต์ที่ทันสมัย ใช้งานง่าย ตอบสนองทุกอุปกรณ์</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>ผลงานของเรา</h2>
+                <p>เราภูมิใจในทุกโปรเจกต์ที่สร้างสรรค์ เพื่อพิสูจน์ถึงคุณภาพและความเชี่ยวชาญ</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-card">
+                    <img src="https://via.placeholder.com/400x220/8A2BE2/FFFFFF?text=GreenThumb+Bot" alt="GreenThumb Discord Bot">
+                    <div class="portfolio-info">
+                        <h3>GreenThumb Discord Bot</h3>
+                        <p>บอท Discord ที่ช่วยจัดการกิจกรรมในคอมมูนิตี้สำหรับผู้ชื่นชอบพืชพรรณและสวน</p>
+                    </div>
+                </div>
+                <!-- สามารถเพิ่มผลงานอื่น ๆ ได้ที่นี่ -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2>ติดต่อเรา</h2>
+                <p>มาเริ่มต้นสร้างสรรค์สิ่งใหม่ๆ ด้วยกัน</p>
+            </div>
+            <div class="contact-content">
+                <p>ติดต่อเราได้ที่ Discord เพื่อพูดคุยเกี่ยวกับโปรเจกต์ของคุณ หรือสอบถามข้อมูลเพิ่มเติม เราพร้อมให้บริการ!</p>
+                <a href="https://discord.gg/TCeuVqr8AZ" target="_blank" rel="noopener noreferrer" class="discord-link">
+                    <span class="discord-icon"></span> เข้าร่วม Discord ของเรา
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2024 GODZILLA ENTERPIRE. All rights reserved.</p>
+            <div class="footer-links">
+                <!-- <a>นโยบายความเป็นส่วนตัว</a> ถ้ามี -->
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Intersection Observer for fade-in animations
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+
+            mobileMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                mobileMenu.classList.toggle('active');
+            });
+
+            // Close mobile menu when a link is clicked
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                });
+            });
+
+            // Add Discord icon dynamically (using SVG for simplicity)
+            const discordLink = document.querySelector('.discord-link .discord-icon');
+            if (discordLink) {
+                discordLink.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M20.25 0c-1.8 0-3.264.936-4.004 2.304l-.06-.108-1.572-2.196h-8.25c-1.128 0-2.04.912-2.04 2.04v16.32c0 1.128.912 2.04 2.04 2.04h11.232c1.476 0 2.76-1.02 3.108-2.436.216-.864.12-1.788-.264-2.58l.12-.084c.732-.48 1.284-1.296 1.488-2.22.228-1.092-.096-2.172-.888-2.928l.048-.048c.84-.792 1.392-1.776 1.596-2.856.228-1.092-.096-2.172-.888-2.928.732-.48 1.284-1.296 1.488-2.22.18-.864.084-1.788-.264-2.58-.096-.204-.216-.396-.348-.576.732-.48 1.284-1.296 1.488-2.22.228-1.092-.096-2.172-.888-2.928l.048-.048c.84-.792 1.392-1.776 1.596-2.856.228-1.092-.096-2.172-.888-2.928zM7.8 15.6c-.924 0-1.68-.756-1.68-1.68s.756-1.68 1.68-1.68 1.68.756 1.68 1.68-.756 1.68-1.68 1.68zm8.4 0c-.924 0-1.68-.756-1.68-1.68s.756-1.68 1.68-1.68 1.68.756 1.68 1.68-.756 1.68-1.68 1.68zM12 11.28c-2.4 0-4.32 1.608-4.32 3.6 0 2.004 1.92 3.6 4.32 3.6 2.4 0 4.32-1.608 4.32-3.6 0-2.004-1.92-3.6-4.32-3.6zM12 11.28c-.012 0-.024 0-.036 0-.012 0-.024 0-.036 0z"/></svg>`;
+            }
+        });
+    </script>
+</body>
+</html>
